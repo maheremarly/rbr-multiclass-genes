@@ -1,0 +1,41 @@
+Package: rbr.multiclass.genes
+Title: A Bayesian Feature Selection Method for Multiclass Classification with
+    Application to Cancer Gene Expression Data
+Version: 1.0.0
+Authors@R: c(
+    person("Maher", "Emarly", email = "maheremarly1@gmail.com", role = c("aut", "cre")),
+    person("Ayman", "Alzaatreh", role = "aut"),
+    person("Luai", "Al-Labadi", role = "aut"))
+Description: Code for the paper of the same name (preprint,
+    doi:10.21203/rs.3.rs-9106857/v1). Extends the relative belief ratio filter
+    from two classes to k, scoring each gene by the evidence against equality of
+    its class-conditional means, and benchmarks it against information gain,
+    symmetric uncertainty, mRMR and ReliefF on cancer microarray datasets
+    with four classifiers under five-fold cross-validation. This is a research
+    project, not an installable package: the modules in R/ are sourced by the
+    entry points in scripts/.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.0.0)
+Imports:
+    abind,
+    caret,
+    class,
+    CORElearn,
+    dplyr,
+    e1071,
+    FSelector,
+    glmnet,
+    ggplot2,
+    gridExtra,
+    openxlsx,
+    praznik,
+    randomForest,
+    reshape2,
+    scales,
+    yaml
+Additional_repositories: https://github.com/ramhiser/datamicroarray
+SystemRequirements: Java (>= 8), required by FSelector via RWeka. The
+    datamicroarray package is not on CRAN; install it with
+    remotes::install_github("ramhiser/datamicroarray").

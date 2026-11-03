@@ -1,0 +1,66 @@
+# Datasets and run settings for the gene-expression experiments.
+#
+# Every dataset is loaded from the datamicroarray package, which is not on
+# CRAN:
+#   remotes::install_github("ramhiser/datamicroarray")
+#
+# The `defaults:` block holds the settings shared by all datasets; a per-dataset
+# key overrides it. Every seed is listed here rather than scattered through the
+# code as a bare set.seed() call.
+
+defaults:
+  # Features kept by the ANOVA screen. At or above the feature count this
+  # REORDERS by ascending adjusted p-value and keeps everything.
+  n_prefilter: 1000000
+
+  # Stratified ranking / evaluation split, as two integers.
+  train_numerator: 1
+  train_denominator: 2
+
+  # Top-ranked features carried from the ranking stage into the evaluation.
+  # The subset fractions below are fractions OF THIS, not of the whole gene set.
+  shortlist: 100
+
+  # Fractions of the shortlist to retain, in the paper's order.
+  stepsize: [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
+
+  # Cross-validation on the evaluation half, and the folds used inside each
+  # training partition to select hyperparameters.
+  cv_folds: 5
+  inner_folds: 5
+  cv_seed: 7
+
+  # Monte Carlo sample size and prior quantile bins for the RBR filter.
+  rbr_draws: 5000
+  rbr_bins: 20
+
+  # Seeds. rbr_seed is set once per feature, so every feature sees the same
+  # prior sample and is separated from the others only by its posterior.
+  split_seed: 12345
+  rbr_seed: 2
+  score_seed: 5
+  relief_seed: 4
+
+  # Seed set before every fit of each classifier.
+  fit_seeds:
+    logistic regression: 8
+    KNN: 11
+    random forest: 13
+    SVM: 16
+
+data:
+  # The nine datasets the manuscript reports, with the paper's names for them.
+  alon:        {}   # Colon Cancer            62 x  2000, 2 classes
+  golub:       {}   # Leukemia (Golub)        72 x  7129, 3 classes
+  gravier:     {}   # Breast Cancer (Gravier) 168 x 2905, 2 classes
+  khan:        {}   # SRBCT                   63 x  2308, 4 classes
+  pomeroy:     {}   # CNS Tumor               60 x  7128, 2 classes
+  shipp:       {}   # Lymphoma                58 x  6817, 2 classes
+  sorlie:      {}   # Breast Cancer (Sorlie)  85 x   456, 5 classes
+  yeoh:        {}   # Leukemia (Yeoh)        248 x  1000, 6 classes
+  burczynski:  {}   # Crohn's Disease        127 x  1000, 3 classes
+
+  # Run for the study but commented out of the manuscript. Their figures are the
+  # ones in the paper source's Without_ANOVA/ directory.
+  gordon:      {}   # Lung Cancer            181 x 12533, 2 classes
+  su:          {}   #                        102 x  5565, 4 classes

@@ -1,0 +1,23 @@
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Data and outputs, anchored to the repository root so that R/filters/ and
+# R/models/ are not affected by a stray `data` or `output` rule
+/data/
+/output/
+
+# Workbooks, figures and caches written by the pipeline
+*.xlsx
+*.rds
+*.pdf
+
+# Environments
+.Renviron
+renv/library/
+
+# macOS and Windows
+.DS_Store
+desktop.ini
